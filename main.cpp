@@ -9,48 +9,38 @@
 
 int main()
 {
+  printf("Hello World !\n");
 
+  environnement test(50);
 
-  environnement test(5,8);
-  printf("%d\n",test.Get_nbProie() );
-
-
-	printf("Hello World !\n");
-
-  //proie *tableau[5];
-  //proie* tableau = new proie[5];
 	proie* tableau =	test.Get_TabProie();
 
-  /*tableau[0]= new proie();
-  tableau[1]= new proie();
-  tableau[2]= new proie(12, 18);
-  tableau[3]= new proie(13,19);
-  tableau[4]= new proie(11,17); */
+/*
 
-  for (int i=0; i<5; i++)
+  for (int i=0; i<test.Get_nbProie(); i++)
   {
   	tableau[i].Get_pos().affichevector();
-    printf("\n");
     tableau[i].Get_vit().affichevector();
   	
   }
 
-   test.MouvProie();
+
+  test.MouvProie();
 
   printf("\n");
 
-  /*for (int i=0; i<5; i++)
-  {
-  	tableau[i].Get_speed(tableau,i);
-    tableau[i].Get_rank(tableau,i, 1);
-    tableau[i].Get_pos().affichevector();
-  	tableau[i].Get_vit().affichevector();
-   
-  }
-  /*
-  
 
-/*    bwindow win(640,480);
+  for (int i=0; i<test.Get_nbProie(); i++)
+  {
+    tableau[i].Get_pos().affichevector();
+    tableau[i].Get_vit().affichevector();
+    
+  }
+
+  
+*/
+  
+ bwindow win(640,480);
     printf("%d\n",win.init());
     win.map();
     for(;;)
@@ -60,10 +50,12 @@ int main()
 	{
 	    case BKPRESS :
 		printf("keypressed\n"); 
-		for (int i=0; i<5; i++)
+    win.draw_fsquare(0,0,640,480,0xFFFFFF);
+		for (int i=0; i<test.Get_nbProie();i++)
  			 {  					
-				win.draw_square(tableau[i]->Get_pos().Get_X()-2,tableau[i]->Get_pos().Get_Y()-2,tableau[i]->Get_pos().Get_X()+2,tableau[i]->Get_pos().Get_Y()+2,0xFF0000);
+				win.draw_fsquare(tableau[i].Get_pos().Get_X()-2,tableau[i].Get_pos().Get_Y()-2,tableau[i].Get_pos().Get_X()+2,tableau[i].Get_pos().Get_Y()+2,0xFF0000);
 			}
+    test.MouvProie();  
 		printf("key : %s\n",win.get_lastkey());
 		break;
 	    case BBPRESS:
@@ -82,7 +74,6 @@ int main()
     }
 
     
-  */
-
+  
     return 0;
 }

@@ -1,5 +1,5 @@
-test.out: main.o bwindow.o vector.o environnement.o agent.o proie.o predateur.o
-	g++ -o test.out main.o bwindow.o vector.o environnement.o agent.o proie.o predateur.o -lX11 -L/usr/X11R6/lib
+test.out: main.o bwindow.o vector.o environnement.o agent.o proie.o predateur.o obstacle.o
+	g++ -o test.out main.o bwindow.o vector.o environnement.o agent.o proie.o predateur.o obstacle.o -lX11 -L/usr/X11R6/lib
 
 main.o: main.cpp
 	g++ -c main.cpp 
@@ -21,6 +21,9 @@ proie.o: proie.h proie.cpp agent.h
 
 predateur.o: predateur.h predateur.cpp agent.h
 	g++ -c predateur.cpp -o predateur.o 
+
+obstacle.o: obstacle.h obstacle.cpp agent.h
+	g++ -c obstacle.cpp -o obstacle.o	
 
 clean :
 	rm *.o *.out

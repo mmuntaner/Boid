@@ -6,8 +6,8 @@
 
 
 
-#ifndef __ENVIRONNEMENT_H__
-#define __ENVIRONNEMENT_H__
+#ifndef __OBSTACLE_H__
+#define __OBSTACLE_H__
 
 
 // ===========================================================================
@@ -15,16 +15,13 @@
 // ===========================================================================
 #include <cstdio>
 #include <cstdlib>
-#include "agent.h"
-#include "proie.h"
-#include "obstacle.h"
 
 
 
 // ===========================================================================
 //                                Project Files
 // ===========================================================================
-
+#include "agent.h"
 
 
 
@@ -37,7 +34,7 @@
 
 
 
-class environnement
+class obstacle : public agent
 {
   public :
     
@@ -48,27 +45,22 @@ class environnement
     // =======================================================================
     //                               Constructors
     // =======================================================================
-    environnement(void);
-    environnement(int n);
+    obstacle(void);
+    obstacle(float a, float b);
 
     // =======================================================================
     //                                Destructor
     // =======================================================================
-    virtual ~environnement(void);
+    virtual ~obstacle(void);
 
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-    inline proie* Get_TabProie(void) const;
-    inline int Get_nbProie(void) const;
-    void vitfinal(void);
-    void posfinal(void);
 
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
-   
-   
+
     // =======================================================================
     //                                Operators
     // =======================================================================
@@ -76,7 +68,8 @@ class environnement
     // =======================================================================
     //                              Public Methods
     // =======================================================================
-    void MouvProie(void);
+    void Set_vit(vector v);
+    void Set_pos(vector v);
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
@@ -90,13 +83,13 @@ class environnement
     // =======================================================================
     //                            Forbidden Constructors
     // =======================================================================
-    /*environnement(void)
+    /*obstacle(void)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
     };
 
-    environnement(const Template_class &model)
+    obstacle(const Template_class &model)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
@@ -110,30 +103,13 @@ class environnement
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
-      const int W = 600;
-      const int H = 480;
-      int nbProie;
-      proie* TabProie;
-      const float dt=1;
-      obstacle* Limite;
-      int nbLimite;
-     
+      static const int rayon;
 };
 
 
 // ===========================================================================
 //                              Getters' definitions
 // ===========================================================================
-inline proie* environnement::Get_TabProie(void) const
-{
-  return TabProie;
-}
-
- inline int environnement::Get_nbProie(void) const
- {
-  return nbProie;
- }
-
 
 // ===========================================================================
 //                              Setters' definitions
@@ -147,6 +123,5 @@ inline proie* environnement::Get_TabProie(void) const
 //                          Inline functions' definition
 // ===========================================================================
 
-
-#endif // __ENVIRONNEMENT_H__
+#endif // __OBSTACLE_H__
 

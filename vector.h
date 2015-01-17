@@ -69,9 +69,9 @@ class vector
     // =======================================================================
      friend inline vector operator+ (vector v1, vector v2);
      friend inline vector operator- (vector v1, vector v2);
-     inline vector operator/ (int v);
-     inline vector operator* (int v);
-
+     inline vector operator/ (float v);
+     inline vector operator* (float v);
+     inline vector operator= (float v);
    // =======================================================================
     //                              Public Methods
     // =======================================================================
@@ -160,7 +160,7 @@ inline vector operator-(vector v1, vector v2)
   
 }
 
-inline vector vector::operator/ (int v)
+inline vector vector::operator/ (float v)
 {
   float a = x/v;
   float b = y/v;
@@ -169,13 +169,19 @@ inline vector vector::operator/ (int v)
   
 }
 
-inline vector vector::operator* (int v)
+inline vector vector::operator* (float v)
 {
   float a = x*v;
   float b = y*v;
   vector p(a,b);
   return p;
   
+}
+
+inline vector vector::operator= (float v)
+{
+  vector p(v,v);
+  return p;
 }
 
 

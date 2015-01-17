@@ -68,11 +68,11 @@ class proie : public agent
     // =======================================================================
     //                              Public Methods
     // =======================================================================
-    inline const float Get_rayon(void) const; 
-    vector vitesse2(proie tab[5], int i);
-    vector vitesse1(proie tab[5], int i);
-    void Get_speed(proie tab[5], int i);
-    void Get_rank(proie tab[5], int i, int dt);
+    inline const int Get_rayon(void) const; 
+    inline const int Get_contact(void) const;
+    void Set_vit(vector v);
+    void Set_pos(vector v);
+    inline int Get_index(void) const;
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
@@ -106,18 +106,32 @@ class proie : public agent
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
-     static const float rayon =5;
-
+     static const int rayon;
+     static const int contact;
+     static int index;
      };
 
 
 // ===========================================================================
 //                              Getters' definitions
 // ===========================================================================
-inline const float proie::Get_rayon(void) const 
+inline const int proie::Get_rayon(void) const 
 {
   return rayon;
 }
+
+inline const int proie::Get_contact(void) const
+{
+    return contact;
+}
+
+inline int proie::Get_index(void) const
+{
+    return this->index;
+}
+
+
+
 // ===========================================================================
 //                              Setters' definitions
 // ===========================================================================

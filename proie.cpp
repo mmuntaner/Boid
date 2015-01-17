@@ -33,16 +33,21 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
+const int proie::rayon=25;
+const int proie::contact=20;
+int proie::index =0;
 
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
 proie::proie(void)
 {
-	float a =40*((float)rand() / (float)RAND_MAX);	
-	float b =40*((float)rand() / (float)RAND_MAX);	
+	float a =640*((float)rand() / (float)RAND_MAX);	
+	float b =480*((float)rand() / (float)RAND_MAX);	
   	vector p(a,b);
   	position=p;
+  	index++;
+
   	
   
 }
@@ -63,59 +68,17 @@ proie::~proie(void)
 // ===========================================================================
 //                                 Public Methods
 // ===========================================================================
-
-vector proie::vitesse2(proie tab[5], int i)
+void proie::Set_vit(vector v)
 {
-	int K=0;
-	vector newvit;
-	for (int j=0; j<5; j++)
-	{
-			vector dist=this->Get_pos() -tab[j].Get_pos();
-			float distance =dist.Get_Norm();
-
-			if (distance<rayon & j!= i)
-			{
-				K++;		
-				newvit=newvit + tab[j].Get_pos() - this->Get_pos(); 
-				newvit= newvit/K;
-			}
-	
-	
-  }
-	return newvit;
+	vitesse=v;
 }
 
-vector proie::vitesse1(proie tab[5], int i)
+void proie::Set_pos(vector v)
 {
-	int K=0;
-	vector newvit;
-	for (int j=0; j<5; j++)
-	{
-			vector dist=this->Get_pos() -tab[j].Get_pos();
-			float distance =dist.Get_Norm();
-
-			if (distance<rayon & j!= i)
-			{
-				K++;		
-				newvit=newvit + tab[j].Get_vit() - this->Get_vit(); 
-				newvit = newvit/K;
-			}
-	
-	
-  }
-	return newvit;
-}
-
-void proie::Get_speed(proie tab[5], int i)
-{
-	vitesse=vitesse+this->vitesse2(tab, i)+this->vitesse1(tab, i);
+	position=v;
 }
 
 
-void proie::Get_rank(proie tab[5], int i, int dt)
-{
-	position=position+this->Get_vit()*dt;
-}
 
 // ===========================================================================
 //                                Protected Methods
