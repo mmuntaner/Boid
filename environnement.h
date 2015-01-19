@@ -61,6 +61,9 @@ class environnement
     // =======================================================================
     inline proie* Get_TabProie(void) const;
     inline int Get_nbProie(void) const;
+    inline obstacle* Get_Limite(void) const;
+    inline int Get_nbLimite(void) const;
+
     void vitfinal(void);
     void posfinal(void);
 
@@ -110,7 +113,7 @@ class environnement
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
-      const int W = 600;
+      const int W = 640;
       const int H = 480;
       int nbProie;
       proie* TabProie;
@@ -134,6 +137,15 @@ inline proie* environnement::Get_TabProie(void) const
   return nbProie;
  }
 
+inline obstacle* environnement::Get_Limite(void) const
+{
+  return Limite;
+}
+
+ inline int environnement::Get_nbLimite(void) const
+ {
+  return nbLimite;
+ }
 
 // ===========================================================================
 //                              Setters' definitions

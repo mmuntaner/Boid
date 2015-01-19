@@ -59,8 +59,8 @@ class agent
     // =======================================================================
     inline vector Get_pos(void) const;
     inline vector Get_vit(void) const;
-    inline const float Get_c(void) const;
     // inline int Get_index(void) const;
+    inline const int Get_d_contact(void) const;
 
     // =======================================================================
     //                            Accessors: setters
@@ -109,7 +109,7 @@ class agent
     // =======================================================================
     vector position;
     vector vitesse;
-    static const float d_contact;
+
     
 };
 
@@ -126,6 +126,8 @@ inline vector agent::Get_pos(void) const
 {
   return position;
 }
+
+
 
 
 /*inline int agent::Get_index(void) const

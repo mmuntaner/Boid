@@ -51,18 +51,19 @@ environnement::environnement(int n)
 	{
 		Limite[i].Set_pos(vector(i,0));
 	}
-	for(int i=W;i<(2*W);i++)
+	for(int i=0;i<W;i++)
 	{
-		Limite[i].Set_pos(vector(i,H));
+		Limite[i+H].Set_pos(vector(i,H));
 	}
-	for(int i=(2*W);i<(2*W+H);i++)
+	for(int i=0;i<H;i++)
 	{
-		Limite[i].Set_pos(vector(0,i));
+		Limite[i+H+W].Set_pos(vector(0,i));
 	}
-	for(int i=(2*W+H);i<k;i++)
+	for(int i=0;i<H;i++)
 	{
-		Limite[i].Set_pos(vector(H,i));
+		Limite[i+H+H+W].Set_pos(vector(H,i));
 	}
+	nbLimite=k;
 	
 }
 
@@ -96,9 +97,11 @@ void environnement::MouvProie(void)
 		//printf("On étudie l'agent numéro %d\n",i );
 		float K1=0;
 		float K2=0;
+		float O=0;
 		vector newvit2(0,0);
 		vector newvit1(0,0);
 		vector newvit3(0,0);
+		vector newvit4(0,0);
 
 		for(int j=0; j<nbProie;j++)
 		{
@@ -133,13 +136,35 @@ void environnement::MouvProie(void)
 		{
 			vector dist=TabProie[k].Get_pos() -TabProie[i].Get_pos();
 			float distance =dist.Get_Norm();
+			
+
 			if (distance<TabProie[i].Get_contact() & k!= i)
 			{
 				K2++; 
 				newvit3=newvit3 + TabProie[k].Get_pos() - TabProie[i].Get_pos(); 
+			}
+
+		}	
+
+		for (int k=0; k<nbLimite;k++)
+		{
+
+			vector espace=Limite[k].Get_pos()-TabProie[i].Get_pos();
+			float esp = espace.Get_Norm();
+
+			if (esp<TabProie[i].Get_contact()) 
+			{
 				
+				O++;
+				newvit4=newvit4 + Limite[k].Get_pos() - TabProie[i].Get_pos();
 
 			}
+
+		}
+
+		if (O!=0)
+		{
+			newvit4=newvit4/O;
 		}
 		if (K2!=0)
 		{
@@ -156,6 +181,7 @@ void environnement::MouvProie(void)
 		//V1.affichevector();
 		vector V2=newvit2*dt;
 		vector V3=newvit3*dt;
+		vector V4=newvit4*dt;
 
 		//printf("Valeur de V1 :");
   		//V1.affichevector();
@@ -177,7 +203,8 @@ void environnement::MouvProie(void)
 
   		//printf("\n");
 
-  		vector V=V1+V2-V3;
+  		V4=V4*0.4;
+  		vector V=V1+V2-V3-V4;
 
   		V=TabProie[i].Get_vit()+V;
   		//printf("Valeur de V : ");
