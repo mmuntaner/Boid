@@ -44,24 +44,24 @@ environnement::environnement(int n)
 {
 
 	nbProie=n;
-	int k=2*H+2*W;
+	int k=(2*H+2*W)/4;
 	TabProie= new proie [nbProie];
 	Limite= new obstacle [k];
-	for (int i=0; i<W; i++)
+	for (int i=0; i<(W/4); i++)
 	{
-		Limite[i].Set_pos(vector(i,0));
+		Limite[i].Set_pos(vector(i*4,0));
 	}
-	for(int i=0;i<W;i++)
+	for(int i=0;i<(W/4);i++)
 	{
-		Limite[i+H].Set_pos(vector(i,H));
+		Limite[i+(H/4)].Set_pos(vector(i*4,H));
 	}
-	for(int i=0;i<H;i++)
+	for(int i=0;i<(H/4);i++)
 	{
-		Limite[i+H+W].Set_pos(vector(0,i));
+		Limite[i+(H+W)/4].Set_pos(vector(0,i*4));
 	}
-	for(int i=0;i<H;i++)
+	for(int i=0;i<(H/4);i++)
 	{
-		Limite[i+H+H+W].Set_pos(vector(H,i));
+		Limite[i+(H+H+W)/4].Set_pos(vector(H,i*4));
 	}
 	nbLimite=k;
 	

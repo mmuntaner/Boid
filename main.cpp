@@ -50,12 +50,12 @@ int main()
 	{
 	    case BKPRESS :
 		printf("keypressed\n"); 
-    win.draw_fsquare(0,0,640,480,0xFFFFFF);
+    /*win.draw_fsquare(0,0,640,480,0xFFFFFF);
 		for (int i=0; i<test.Get_nbProie();i++)
  			 {  					
 				win.draw_fsquare(tableau[i].Get_pos().Get_X()-2,tableau[i].Get_pos().Get_Y()-2,tableau[i].Get_pos().Get_X()+2,tableau[i].Get_pos().Get_Y()+2,0xFF0000);
 			}
-    test.MouvProie();  
+    test.MouvProie();  */
 		printf("key : %s\n",win.get_lastkey());
 		break;
 	    case BBPRESS:
@@ -66,6 +66,12 @@ int main()
 	    case BCONFIGURE:
 		printf("configure\n"); break;
 	}
+  win.draw_fsquare(0,0,640,480,0xFFFFFF);
+  for (int i=0; i<test.Get_nbProie();i++)
+       {            
+        win.draw_fsquare(tableau[i].Get_pos().Get_X()-2,tableau[i].Get_pos().Get_Y()-2,tableau[i].Get_pos().Get_X()+2,tableau[i].Get_pos().Get_Y()+2,0xFF0000);
+      }
+    test.MouvProie();  
 	//win.draw_point(300,300,0xFF00);
 	//win.draw_line(400,400,640,480,0xFF0000); // Coordonnées du point de départ et d'arrivée.
 	//win.draw_text(10,10,0x0,"Hello World",strlen("Hello World")); // Coordonées du point de départ / le texte / la taille du texte

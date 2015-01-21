@@ -71,7 +71,7 @@ class vector
      friend inline vector operator- (vector v1, vector v2);
      inline vector operator/ (float v);
      inline vector operator* (float v);
-     inline vector operator= (float v);
+    
    // =======================================================================
     //                              Public Methods
     // =======================================================================
@@ -178,11 +178,7 @@ inline vector vector::operator* (float v)
   
 }
 
-inline vector vector::operator= (float v)
-{
-  vector p(v,v);
-  return p;
-}
+
 
 
 // ===========================================================================

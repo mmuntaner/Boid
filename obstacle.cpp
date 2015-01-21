@@ -36,14 +36,16 @@ const int obstacle::rayon=1;
 // ===========================================================================
 obstacle::obstacle(void)
 {
-	vitesse=0;
+	vector n(0,0);
+	vitesse=n;
 }
 
 obstacle::obstacle(float a, float b)
 {
 	vector p(a,b);
 	position=p;
-	vitesse=0;
+	vector n(0,0);
+	vitesse=n;
 }
 // ===========================================================================
 //                                  Destructor
