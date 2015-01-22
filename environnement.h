@@ -17,6 +17,7 @@
 #include <cstdlib>
 #include "agent.h"
 #include "proie.h"
+#include "predateur.h"
 #include "obstacle.h"
 
 
@@ -50,7 +51,8 @@ class environnement
     // =======================================================================
     environnement(void);
     environnement(int n);
-    environnement(int p, int o);
+    environnement(int n, int o);
+    environnement(int n, int o, int p);
 
     // =======================================================================
     //                                Destructor
@@ -64,10 +66,15 @@ class environnement
     inline int Get_nbProie(void) const;
     inline obstacle* Get_TabObstacle(void) const;
     inline int Get_nbObstacle(void) const;
+    inline predateur* Get_TabPredateur(void) const;
+    inline int Get_nbPredateur(void) const;
     
 
-    void vitfinal(void);
-    void posfinal(void);
+    void vitfinalProie(void);
+    void posfinalProie(void);
+    void vitfinalPred(void);
+    void posfinalPred(void);
+
 
     // =======================================================================
     //                            Accessors: setters
@@ -81,7 +88,7 @@ class environnement
     // =======================================================================
     //                              Public Methods
     // =======================================================================
-    void MouvProie(void);
+    void Mouve(void);
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
@@ -117,17 +124,20 @@ class environnement
     // =======================================================================
       const int W = 640;
       const int H = 480;
-      const float dt=0.3;
+      const float dt=0.12;
 
-      float G1 = 0.25;
-      float G2 = 0.002;
-      float G3 = 0.5;
+      float G1 = 0.13;
+      float G2 = 0.004;
+      float G3 = 0.6;
 
       int nbProie;
       proie* TabProie;
 
       int nbObstacle;
       obstacle* TabObstacle;
+
+      int nbPredateur;
+      predateur* TabPredateur;
   
 };
 
@@ -153,6 +163,16 @@ inline proie* environnement::Get_TabProie(void) const
  inline int environnement::Get_nbObstacle(void) const
  {
   return nbObstacle;
+ }
+
+ inline predateur* environnement::Get_TabPredateur(void) const
+{
+  return TabPredateur;
+}
+
+ inline int environnement::Get_nbPredateur(void) const
+ {
+  return nbPredateur;
  }
 
 

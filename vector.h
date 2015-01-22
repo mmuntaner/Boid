@@ -45,6 +45,7 @@ class vector
     // =======================================================================
     vector(void);
     vector (float new_x, float new_y);
+    inline vector(const vector &model);
 
     // =======================================================================
     //                                Destructor
@@ -189,5 +190,12 @@ inline void vector::affichevector(void)
     printf("%f %f \n", this->Get_X(), this->Get_Y());
 }
 
+inline vector::vector(const vector &model)
+{
+  x=model.x;
+  y=model.y;
+  norm=model.norm;
+  
+}
 #endif // __VECTOR_H__
 

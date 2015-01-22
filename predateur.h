@@ -55,7 +55,10 @@ class predateur : public agent
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-    inline const float Get_rayon(void) const;
+    inline const int Get_rayon(void) const; 
+    inline const int Get_contact(void) const;
+    void Set_vit(vector v);
+    void Set_pos(vector v);
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
@@ -101,17 +104,25 @@ class predateur : public agent
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
-    static const float rayon = 10;
+    static const int rayon;
+    static const int contact;
+
 };
 
 
 // ===========================================================================
 //                              Getters' definitions
 // ===========================================================================
-inline const float predateur::Get_rayon(void) const 
+inline const int predateur::Get_rayon(void) const 
 {
   return rayon;
 }
+
+inline const int predateur::Get_contact(void) const
+{
+    return contact;
+}
+
 // ===========================================================================
 //                              Setters' definitions
 // ===========================================================================

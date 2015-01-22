@@ -41,17 +41,15 @@ obstacle::obstacle(void)
 	float b =460*((float)rand() / (float)RAND_MAX);	
   	vector p(a,b);
   	position=p;
-	vector n(0,0);
-	vitesse=n;
+
 }
 
 obstacle::obstacle(float a, float b)
 {
 	vector p(a,b);
 	position=p;
-	vector n(0,0);
-	vitesse=n;
 }
+
 // ===========================================================================
 //                                  Destructor
 // ===========================================================================

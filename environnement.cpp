@@ -45,6 +45,10 @@ environnement::environnement(int n)
 
 	nbProie=n;
 	TabProie= new proie [nbProie];
+	nbObstacle=0;
+	TabObstacle=NULL;
+	nbPredateur=0;
+	TabPredateur=NULL;
 
 }
 
@@ -56,6 +60,23 @@ environnement::environnement(int p, int o)
 
 	nbObstacle=o;
 	TabObstacle = new obstacle [nbObstacle];
+
+	nbPredateur=0;
+	TabPredateur=NULL;
+
+}
+
+environnement::environnement(int n, int o, int p)
+{
+
+	nbProie=n;
+	TabProie= new proie [nbProie];
+
+	nbObstacle=o;
+	TabObstacle = new obstacle [nbObstacle];
+
+	nbPredateur=p;
+	TabPredateur = new predateur [nbPredateur];
 
 }
 
@@ -70,20 +91,28 @@ environnement::~environnement(void)
 // ===========================================================================
 //                                 Public Methods
 // ===========================================================================
-void environnement::MouvProie(void)
+void environnement::Mouve(void)
 {
+	
 	for(int i=0; i<nbProie;i++)
 	{
-		
-		vitfinal();
-		posfinal();
+		vitfinalProie();
+		posfinalProie();
 
+	}
+
+	if (nbPredateur !=0)
+	{
+		for (int i = 0; i <nbPredateur; i++)
+		{
+			vitfinalPred();
+			posfinalPred();
+		}
 	}
 }
 
- void environnement::vitfinal(void)
+ void environnement::vitfinalProie(void)
 {
-	
 	for (int i=0; i<nbProie; i++)
 	{
 		//printf("On étudie l'agent numéro %d\n",i );
@@ -197,21 +226,21 @@ void environnement::MouvProie(void)
 		float a = TabProie[i].Get_pos().Get_X();
 		float b = TabProie[i].Get_pos().Get_Y();
 
-		if ( a<20 )
+		if ( a<10 )
 		{
-		V.SetX(0.01);
+		V.SetX(0.007);
 		}
-		if ( a>620 )
+		if ( a>630 )
 		{
-		V.SetX(-0.01);
+		V.SetX(-0.007);
 		}
-		if ( b<20 )
+		if ( b<10 )
 		{
-		V.SetY(0.01);
+		V.SetY(0.007);
 		}
-		if ( b>460 )
+		if ( b>470 )
 		{
-		V.SetY(-0.01);
+		V.SetY(-0.007);
 		}
 
 		TabProie[i].Set_vit(V);
@@ -220,28 +249,69 @@ void environnement::MouvProie(void)
 	
 	}
 
+	
+
 }
 
-void environnement::posfinal(void)
+void environnement::posfinalProie(void)
 {
 	
 	for (int i=0; i<nbProie;i++)
 	{
-		/*printf("Valeur de la position :");
-		TabProie[i].Get_pos().affichevector();
-		printf("\n");
-
-		printf("Valeur de la vitesse :");
-		TabProie[i].Get_vit().affichevector();
-		printf("\n");
-	
 		TabProie[i].Set_pos(TabProie[i].Get_pos()+TabProie[i].Get_vit()*dt);
-		printf("Valeur de la position finale :");
-		TabProie[i].Get_pos().affichevector();
-		printf("\n");*/
+	}		
 
-		TabProie[i].Set_pos(TabProie[i].Get_pos()+TabProie[i].Get_vit()*dt);
+}
+
+void environnement::vitfinalPred(void)
+{
+	for (int i = 0; i <nbPredateur; ++i)
+	{
+		float c=60*((float)rand() / (float)RAND_MAX)-30;
+  		float d=60*((float)rand() / (float)RAND_MAX)-30;
+  		vector v(c,d);
+  		printf("Valeur de la vitesse\n");
+  		v.affichevector();
+ 		TabPredateur[i].Set_vit(v);
+
+
+  		float a = TabPredateur[i].Get_pos().Get_X();
+		float b = TabPredateur[i].Get_pos().Get_Y();
+
+		if ( a<10 )
+		{
+		v.SetX(-0.01);
+		}
+		if ( a>630 )
+		{
+		v.SetX(-0.01);
+		}
+		if ( b<10 )
+		{
+		v.SetY(0.01);
+		}
+		if ( b>470 )
+		{
+		v.SetY(-0.01);
+		}
+
+		TabPredateur[i].Set_vit(v);
 	}
+  			
+}
+
+void environnement::posfinalPred(void)
+{
+
+	for (int i = 0; i <nbPredateur; i++)
+	{
+		
+		vector test = TabPredateur[i].Get_pos()+TabPredateur[i].Get_vit()*dt;
+		printf("La nouvelle valeur de la position : \n");
+		test.affichevector();
+		TabPredateur[i].Set_pos(TabPredateur[i].Get_pos()+TabPredateur[i].Get_vit()*dt);
+	}
+		
 }
 // ===========================================================================
 //                                Protected Methods

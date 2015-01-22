@@ -30,12 +30,24 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-
+const int predateur::rayon=40;
+const int predateur::contact=12;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
 predateur::predateur(void)
 {
+	
+	float a =620*((float)rand() / (float)RAND_MAX)+10;
+	float b =460*((float)rand() / (float)RAND_MAX)+10;
+  vector p(a,b);
+	position=p;
+  float c=2*((float)rand() / (float)RAND_MAX)-1;
+  float d=2*((float)rand() / (float)RAND_MAX)-1;
+  vector v(c,d);
+  vitesse=v;
+
+
 }
 
 // ===========================================================================
@@ -52,6 +64,15 @@ predateur::~predateur(void)
 // ===========================================================================
 //                                Protected Methods
 // ===========================================================================
+void predateur::Set_vit(vector v)
+{
+	vitesse=v;
+}
+
+void predateur::Set_pos(vector v)
+{
+	position=v;
+}
 
 // ===========================================================================
 //                               Non inline accessors

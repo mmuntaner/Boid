@@ -34,7 +34,7 @@
 //                         Definition of static attributes
 // ===========================================================================
 const int proie::rayon=40;
-const int proie::contact=10;
+const int proie::contact=12;
 
 
 // ===========================================================================
