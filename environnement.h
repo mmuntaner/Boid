@@ -115,9 +115,15 @@ class environnement
     // =======================================================================
       const int W = 640;
       const int H = 480;
+      const float dt=1;
+
+      float G1 = 0.25;
+      float G2 = 0.004;
+      float G3 = 0.2;
+
       int nbProie;
       proie* TabProie;
-      const float dt=1;
+  
       obstacle* Limite;
       int nbLimite;
      

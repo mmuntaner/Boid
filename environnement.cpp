@@ -44,8 +44,9 @@ environnement::environnement(int n)
 {
 
 	nbProie=n;
-	int k=(2*H+2*W)/4;
 	TabProie= new proie [nbProie];
+
+	/*int k=(2*H+2*W)/4;
 	Limite= new obstacle [k];
 	for (int i=0; i<(W/4); i++)
 	{
@@ -63,7 +64,7 @@ environnement::environnement(int n)
 	{
 		Limite[i+(H+H+W)/4].Set_pos(vector(H,i*4));
 	}
-	nbLimite=k;
+	nbLimite=k;*/
 	
 }
 
@@ -186,24 +187,24 @@ void environnement::MouvProie(void)
 		//printf("Valeur de V1 :");
   		//V1.affichevector();
   		//printf("Valeur de V1*gamma :");
-  		V1=V1*0.15;
+  		V1=V1*G1;
   		//V1.affichevector();
 
   		//printf("Valeur de V2 : ");
   		//V2.affichevector();
-  		V2=V2*0.004;
+  		V2=V2*G2;
   		//printf("Valeur de V2*gamma : ");
   		//V2.affichevector();
 
   		//printf("Valeur de V3 : ");
   		//V3.affichevector();
   		//printf("Valeur de V3*gamma : ");
-  		V3=V3*0.4;
+  		V3=V3*G3;
   		//V3.affichevector();
 
   		//printf("\n");
 
-  		V4=V4*0.4;
+  		V4=V4*G3;
   		vector V=V1+V2-V3-V4;
 
   		V=TabProie[i].Get_vit()+V;
@@ -211,6 +212,27 @@ void environnement::MouvProie(void)
   		//V.affichevector();
 
   		
+
+
+	float a = TabProie[i].Get_pos().Get_X();
+	float b = TabProie[i].Get_pos().Get_Y();
+
+	if ( a<20 )
+	{
+	V.SetX(0.02);
+	}
+	if ( a>620 )
+	{
+	V.SetX(-0.02);
+	}
+	if ( b<20 )
+	{
+	V.SetY(0.02);
+	}
+	if ( b>460 )
+	{
+	V.SetY(-0.02);
+	}
 
 	TabProie[i].Set_vit(V);
 	/*printf("Valeur de la nouvelle vitesse finale :");
