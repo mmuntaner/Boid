@@ -72,7 +72,7 @@ class proie : public agent
     inline const int Get_contact(void) const;
     void Set_vit(vector v);
     void Set_pos(vector v);
-    inline int Get_index(void) const;
+  
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
@@ -108,7 +108,7 @@ class proie : public agent
     // =======================================================================
      static const int rayon;
      static const int contact;
-     static int index;
+
      };
 
 
@@ -125,10 +125,7 @@ inline const int proie::Get_contact(void) const
     return contact;
 }
 
-inline int proie::Get_index(void) const
-{
-    return this->index;
-}
+
 
 
 

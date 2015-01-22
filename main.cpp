@@ -11,9 +11,10 @@ int main()
 {
   printf("Hello World !\n");
 
-  environnement test(50);
+  environnement test(50,2);
 
   proie* tableau = test.Get_TabProie();
+  obstacle* tabO = test.Get_TabObstacle();
 
 /*
 
@@ -67,6 +68,11 @@ int main()
 		printf("configure\n"); break;
 	}
   win.draw_fsquare(0,0,640,480,0xFFFFFF);
+  for (int i=0; i<test.Get_nbObstacle();i++)
+       {            
+        win.draw_fsquare(tabO[i].Get_pos().Get_X()-4,tabO[i].Get_pos().Get_Y()-4,tabO[i].Get_pos().Get_X()+4,tabO[i].Get_pos().Get_Y()+4,0xFF0);
+      }
+
   for (int i=0; i<test.Get_nbProie();i++)
        {            
         win.draw_fsquare(tableau[i].Get_pos().Get_X()-2,tableau[i].Get_pos().Get_Y()-2,tableau[i].Get_pos().Get_X()+2,tableau[i].Get_pos().Get_Y()+2,0xFF0000);

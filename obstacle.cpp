@@ -36,6 +36,11 @@ const int obstacle::rayon=1;
 // ===========================================================================
 obstacle::obstacle(void)
 {
+
+	float a =620*((float)rand() / (float)RAND_MAX);	
+	float b =460*((float)rand() / (float)RAND_MAX);	
+  	vector p(a,b);
+  	position=p;
 	vector n(0,0);
 	vitesse=n;
 }

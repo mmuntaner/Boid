@@ -35,7 +35,7 @@
 // ===========================================================================
 const int proie::rayon=40;
 const int proie::contact=10;
-int proie::index =0;
+
 
 // ===========================================================================
 //                                  Constructors
@@ -46,7 +46,7 @@ proie::proie(void)
 	float b =480*((float)rand() / (float)RAND_MAX);	
   	vector p(a,b);
   	position=p;
-  	index++;
+
 
   	
   

@@ -46,26 +46,17 @@ environnement::environnement(int n)
 	nbProie=n;
 	TabProie= new proie [nbProie];
 
-	/*int k=(2*H+2*W)/4;
-	Limite= new obstacle [k];
-	for (int i=0; i<(W/4); i++)
-	{
-		Limite[i].Set_pos(vector(i*4,0));
-	}
-	for(int i=0;i<(W/4);i++)
-	{
-		Limite[i+(H/4)].Set_pos(vector(i*4,H));
-	}
-	for(int i=0;i<(H/4);i++)
-	{
-		Limite[i+(H+W)/4].Set_pos(vector(0,i*4));
-	}
-	for(int i=0;i<(H/4);i++)
-	{
-		Limite[i+(H+H+W)/4].Set_pos(vector(H,i*4));
-	}
-	nbLimite=k;*/
-	
+}
+
+environnement::environnement(int p, int o)
+{
+
+	nbProie=p;
+	TabProie= new proie [nbProie];
+
+	nbObstacle=o;
+	TabObstacle = new obstacle [nbObstacle];
+
 }
 
 // ===========================================================================
@@ -102,7 +93,7 @@ void environnement::MouvProie(void)
 		vector newvit2(0,0);
 		vector newvit1(0,0);
 		vector newvit3(0,0);
-		vector newvit4(0,0);
+		vector newvit3b(0,0);
 
 		for(int j=0; j<nbProie;j++)
 		{
@@ -120,17 +111,10 @@ void environnement::MouvProie(void)
 		}
 		if (K1!=0)
 		{
-			//printf("Valeur de V2 ");
-			//newvit2.affichevector();
-			//printf(" pour K=%f \n",K1 );
+		
 			newvit2= newvit2/K1;
-			//newvit2.affichevector();
-
-			//printf("Valeur de V1 ");
-			//newvit1.affichevector();
-			//printf(" pour K=%f \n",K1 );
 			newvit1= newvit1/K1;
-			//newvit1.affichevector();
+		
 		}
 		
 		for (int k=0; k<nbProie;k++)
@@ -147,33 +131,29 @@ void environnement::MouvProie(void)
 
 		}	
 
-		for (int k=0; k<nbLimite;k++)
+
+		for (int k=0; k<nbObstacle;k++)
 		{
 
-			vector espace=Limite[k].Get_pos()-TabProie[i].Get_pos();
+			vector espace=TabObstacle[k].Get_pos()-TabProie[i].Get_pos();
 			float esp = espace.Get_Norm();
 
 			if (esp<TabProie[i].Get_contact()) 
 			{
-				
 				O++;
-				newvit4=newvit4 + Limite[k].Get_pos() - TabProie[i].Get_pos();
-
+				newvit3b=newvit3b + TabObstacle[k].Get_pos() - TabProie[i].Get_pos();
 			}
 
 		}
 
 		if (O!=0)
 		{
-			newvit4=newvit4/O;
+			newvit3b=newvit3b/O;
 		}
+
 		if (K2!=0)
 		{
-			//printf("Valeur de V3 ");
-			//newvit3.affichevector();
-			//printf(" pour K=%d\n",K2 );
 			newvit3=newvit3/(K2);
-			//newvit3.affichevector();
 		}
 
 		//printf("Valeur de newvit \n");
@@ -182,7 +162,7 @@ void environnement::MouvProie(void)
 		//V1.affichevector();
 		vector V2=newvit2*dt;
 		vector V3=newvit3*dt;
-		vector V4=newvit4*dt;
+		vector V3b=newvit3b*dt;
 
 		//printf("Valeur de V1 :");
   		//V1.affichevector();
@@ -204,8 +184,8 @@ void environnement::MouvProie(void)
 
   		//printf("\n");
 
-  		V4=V4*G3;
-  		vector V=V1+V2-V3-V4;
+  		V3b=V3b*G3;
+  		vector V=V1+V2-V3-V3b;
 
   		V=TabProie[i].Get_vit()+V;
   		//printf("Valeur de V : ");
@@ -214,31 +194,32 @@ void environnement::MouvProie(void)
   		
 
 
-	float a = TabProie[i].Get_pos().Get_X();
-	float b = TabProie[i].Get_pos().Get_Y();
+		float a = TabProie[i].Get_pos().Get_X();
+		float b = TabProie[i].Get_pos().Get_Y();
 
-	if ( a<20 )
-	{
-	V.SetX(0.02);
-	}
-	if ( a>620 )
-	{
-	V.SetX(-0.02);
-	}
-	if ( b<20 )
-	{
-	V.SetY(0.02);
-	}
-	if ( b>460 )
-	{
-	V.SetY(-0.02);
-	}
+		if ( a<20 )
+		{
+		V.SetX(0.01);
+		}
+		if ( a>620 )
+		{
+		V.SetX(-0.01);
+		}
+		if ( b<20 )
+		{
+		V.SetY(0.01);
+		}
+		if ( b>460 )
+		{
+		V.SetY(-0.01);
+		}
 
-	TabProie[i].Set_vit(V);
-	/*printf("Valeur de la nouvelle vitesse finale :");
-	TabProie[i].Get_vit().affichevector();*/
+		TabProie[i].Set_vit(V);
+		/*printf("Valeur de la nouvelle vitesse finale :");
+		TabProie[i].Get_vit().affichevector();*/
 	
 	}
+
 }
 
 void environnement::posfinal(void)

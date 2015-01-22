@@ -50,6 +50,7 @@ class environnement
     // =======================================================================
     environnement(void);
     environnement(int n);
+    environnement(int p, int o);
 
     // =======================================================================
     //                                Destructor
@@ -61,8 +62,9 @@ class environnement
     // =======================================================================
     inline proie* Get_TabProie(void) const;
     inline int Get_nbProie(void) const;
-    inline obstacle* Get_Limite(void) const;
-    inline int Get_nbLimite(void) const;
+    inline obstacle* Get_TabObstacle(void) const;
+    inline int Get_nbObstacle(void) const;
+    
 
     void vitfinal(void);
     void posfinal(void);
@@ -115,18 +117,18 @@ class environnement
     // =======================================================================
       const int W = 640;
       const int H = 480;
-      const float dt=1;
+      const float dt=0.3;
 
       float G1 = 0.25;
-      float G2 = 0.004;
-      float G3 = 0.2;
+      float G2 = 0.002;
+      float G3 = 0.5;
 
       int nbProie;
       proie* TabProie;
+
+      int nbObstacle;
+      obstacle* TabObstacle;
   
-      obstacle* Limite;
-      int nbLimite;
-     
 };
 
 
@@ -143,15 +145,16 @@ inline proie* environnement::Get_TabProie(void) const
   return nbProie;
  }
 
-inline obstacle* environnement::Get_Limite(void) const
+ inline obstacle* environnement::Get_TabObstacle(void) const
 {
-  return Limite;
+  return TabObstacle;
 }
 
- inline int environnement::Get_nbLimite(void) const
+ inline int environnement::Get_nbObstacle(void) const
  {
-  return nbLimite;
+  return nbObstacle;
  }
+
 
 // ===========================================================================
 //                              Setters' definitions
