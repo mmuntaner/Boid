@@ -11,7 +11,7 @@ int main()
 {
   printf("Hello World !\n");
 
-  environnement test(75,4,1);
+  environnement test(10,4,1);
 
 
   proie* tableau = test.Get_TabProie();
@@ -22,8 +22,8 @@ int main()
 
 
 
-
 /*
+
 
   for (int i=0; i<test.Get_nbPredateur(); i++)
   {
@@ -45,9 +45,6 @@ int main()
   
 
 
-
-  test.MouvProie();
-
   printf("\n");
 
 
@@ -58,8 +55,8 @@ int main()
     
   }
 
-  */
-
+  
+*/
   
  bwindow win(640,480);
     printf("%d\n",win.init());
@@ -101,12 +98,14 @@ int main()
       win.draw_fsquare(tabP[i].Get_pos().Get_X()-3,tabP[i].Get_pos().Get_Y()-3,tabP[i].Get_pos().Get_X()+3,tabP[i].Get_pos().Get_Y()+3,0xFF00);
     }  
     
+     }
+    
 	//win.draw_point(300,300,0xFF00);
 	//win.draw_line(400,400,640,480,0xFF0000); // Coordonnées du point de départ et d'arrivée.
 	//win.draw_text(10,10,0x0,"Hello World",strlen("Hello World")); // Coordonées du point de départ / le texte / la taille du texte
 	//win.draw_square(200,200,220,220,0xFF0000); //Rectangle FF0000 Rouge FF00 Vert FF0 Bleu
 	//win.draw_fsquare(10,200,440,440,0xFF00);  // Rectangle rempli
-    }
+   
 
     
   

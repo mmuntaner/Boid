@@ -267,11 +267,9 @@ void environnement::vitfinalPred(void)
 {
 	for (int i = 0; i <nbPredateur; ++i)
 	{
-		float c=60*((float)rand() / (float)RAND_MAX)-30;
-  		float d=60*((float)rand() / (float)RAND_MAX)-30;
+		float c=40*((float)rand() / (float)RAND_MAX)-20;
+  		float d=40*((float)rand() / (float)RAND_MAX)-20;
   		vector v(c,d);
-  		printf("Valeur de la vitesse\n");
-  		v.affichevector();
  		TabPredateur[i].Set_vit(v);
 
 
@@ -307,10 +305,43 @@ void environnement::posfinalPred(void)
 	{
 		
 		vector test = TabPredateur[i].Get_pos()+TabPredateur[i].Get_vit()*dt;
-		printf("La nouvelle valeur de la position : \n");
-		test.affichevector();
+
 		TabPredateur[i].Set_pos(TabPredateur[i].Get_pos()+TabPredateur[i].Get_vit()*dt);
+
+		/*vector direction(0,0);
+		int position;
+		float limite = 1000;
+		for (int j = 0; j <nbProie; ++j)
+		{
+		
+			vector dist=TabPredateur[i].Get_pos() -TabProie[j].Get_pos();
+			float distance =dist.Get_Norm();
+
+			if ( distance < limite )
+			{
+				limite=distance;
+				position=j;
+			}
+
+		
+
+			if (distance<TabPredateur[j].Get_contact() )
+			{
+				direction.SetX(TabProie[position].Get_pos().Get_X());
+				direction.SetY(TabProie[position].Get_pos().Get_Y());
+				TabProie[position].Get_pos().affichevector();
+     	 	   
+				TabPredateur[i].Set_pos(TabPredateur[i].Get_pos()+direction*dt*0.0001);
+			}
+		}
+
+		*/
+
+		
+
 	}
+
+	
 		
 }
 // ===========================================================================

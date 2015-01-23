@@ -30,16 +30,16 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const int predateur::rayon=40;
-const int predateur::contact=12;
+const int predateur::rayon=50;
+const int predateur::contact=20;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
 predateur::predateur(void)
 {
 	
-	float a =620*((float)rand() / (float)RAND_MAX)+10;
-	float b =460*((float)rand() / (float)RAND_MAX)+10;
+	float a =400*((float)rand() / (float)RAND_MAX)+10;
+	float b =300*((float)rand() / (float)RAND_MAX)+10;
   vector p(a,b);
 	position=p;
   float c=2*((float)rand() / (float)RAND_MAX)-1;
