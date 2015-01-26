@@ -37,7 +37,7 @@
  float  environnement::G1 = 0.213;
  float  environnement::G2 = 0.004;
  float  environnement::G3 = 0.585;
- float  environnement::G4 = 0.0005;
+ float  environnement::G4 = 0.05;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -183,7 +183,12 @@ void environnement::Mouve(void)
 			vector espace=TabPredateur[k].Get_pos()-TabProie[i].Get_pos();
 			float esp = espace.Get_Norm();
 
-			newvit4=espace/esp;
+			if (esp<TabProie[i].Get_rayon())
+			{
+				newvit4=espace/esp;
+			
+			}
+
 			
 
 		}
@@ -270,6 +275,7 @@ void environnement::Mouve(void)
 		}
 
 		TabProie[i].Set_vit(V);
+
 		/*printf("Valeur de la nouvelle vitesse finale :");
 		TabProie[i].Get_vit().affichevector();*/
 	
@@ -285,6 +291,17 @@ void environnement::posfinalProie(void)
 	for (int i=0; i<nbProie;i++)
 	{
 		TabProie[i].Set_pos(TabProie[i].Get_pos()+TabProie[i].Get_vit()*dt);
+
+		for (int j = 0; j < nbPredateur; j++)
+		{
+			if ((TabProie[i].Get_pos()-TabPredateur[j].Get_pos()).Get_Norm()<5)
+			{
+				vector inf(-100000,-100000);
+				TabProie[i].Set_pos(inf);
+			}
+		}
+
+		
 	}		
 
 }
@@ -293,33 +310,123 @@ void environnement::vitfinalPred(void)
 {
 	for (int i = 0; i <nbPredateur; ++i)
 	{
-		float c=60*((float)rand() / (float)RAND_MAX)-30;
-  		float d=60*((float)rand() / (float)RAND_MAX)-30;
-  		vector v(c,d);
- 		TabPredateur[i].Set_vit(v);
+		
+		int position;
+		float limite = 1000;
+		vector direction(0,0);
+		vector dist(0,0);
+		float distance;
+		vector vitcontp(0,0);
+		vector vitconto(0,0);
+		float Kp=0;
+		float Ko=0;
+	
 
+		for (int j = 0; j <nbProie; ++j)
+		{
 
-  		float a = TabPredateur[i].Get_pos().Get_X();
+			dist=TabPredateur[i].Get_pos() -TabProie[j].Get_pos();
+		    distance =dist.Get_Norm();
+
+			if ( distance < limite )
+			{
+				limite=distance;
+				position=j;
+			}
+		}
+
+	    if (limite>TabPredateur[i].Get_rayon() )
+			{
+				float c=60*((float)rand() / (float)RAND_MAX)-30;
+  				float d=60*((float)rand() / (float)RAND_MAX)-30;
+  				direction =vector(c,d);
+			}
+
+			
+			
+		if (limite<TabPredateur[i].Get_rayon() )
+		{
+				
+				//printf("Hello\n");
+				
+
+				vector espace=TabPredateur[i].Get_pos()-TabProie[position].Get_pos();
+				float esp = espace.Get_Norm();
+				
+				direction=espace/esp;
+			
+				direction=direction*(-32);
+		
+				
+		}
+		
+
+		for (int k=0; k<nbPredateur;k++)
+		{
+			vector dist=TabPredateur[k].Get_pos() -TabPredateur[i].Get_pos();
+			float distance =dist.Get_Norm();
+			
+
+			if (distance<TabPredateur[i].Get_contact() & k!= i)
+			{
+				Kp++; 
+				vitcontp=vitcontp + TabPredateur[k].Get_pos() - TabPredateur[i].Get_pos(); 
+			}
+
+		}
+
+		if (Kp!=0)
+		{
+			vitcontp=vitcontp/Kp;
+		}
+
+		for (int k=0; k<nbObstacle;k++)
+		{
+			vector dist=TabObstacle[k].Get_pos() -TabPredateur[i].Get_pos();
+			float distance =dist.Get_Norm();
+			
+
+			if (distance<TabPredateur[i].Get_contact() & k!= i)
+			{
+				Ko++; 
+				vitconto=vitconto + TabObstacle[k].Get_pos() - TabPredateur[i].Get_pos(); 
+			}
+
+		}
+
+		if (Ko!=0)
+		{
+			vitconto=vitconto/Ko;
+		}
+
+		direction=direction-vitcontp-vitconto;
+
+		float a = TabPredateur[i].Get_pos().Get_X();
 		float b = TabPredateur[i].Get_pos().Get_Y();
 
 		if ( a<10 )
 		{
-		v.SetX(-0.03);
+		direction.SetX(-2);
 		}
 		if ( a>630 )
 		{
-		v.SetX(-0.03);
+		direction.SetX(-2);
 		}
 		if ( b<10 )
 		{
-		v.SetY(0.03);
+		direction.SetY(2);
 		}
 		if ( b>470 )
 		{
-		v.SetY(-0.03);
+		direction.SetY(-2);
 		}
 
-		TabPredateur[i].Set_vit(v);
+		TabPredateur[i].Set_vit(direction);
+		
+
+
+		
+
 	}
   			
 }

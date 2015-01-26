@@ -11,7 +11,7 @@ int main()
 {
   printf("Hello World !\n");
 
-  environnement test(80,8,1);
+  environnement test(80,8,2);
 
 
   proie* tableau = test.Get_TabProie();
