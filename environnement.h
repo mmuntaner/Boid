@@ -122,13 +122,14 @@ class environnement
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
-      const int W = 640;
-      const int H = 480;
-      const float dt=0.12;
+      static const int W;
+      static const int H;
+      static const float dt;
 
-      float G1 = 0.13;
-      float G2 = 0.004;
-      float G3 = 0.6;
+      static float G1;
+      static float G2;
+      static float G3;
+      static float G4;
 
       int nbProie;
       proie* TabProie;

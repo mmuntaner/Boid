@@ -37,8 +37,8 @@ const int obstacle::rayon=1;
 obstacle::obstacle(void)
 {
 
-	float a =620*((float)rand() / (float)RAND_MAX);	
-	float b =460*((float)rand() / (float)RAND_MAX);	
+	float a =600*((float)rand() / (float)RAND_MAX)+20;	
+	float b =420*((float)rand() / (float)RAND_MAX)+20;
   	vector p(a,b);
   	position=p;
 

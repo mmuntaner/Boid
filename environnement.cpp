@@ -30,7 +30,14 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
+ const int environnement::W = 640;
+ const int  environnement::H = 480;
+ const float  environnement::dt=0.175;
 
+ float  environnement::G1 = 0.213;
+ float  environnement::G2 = 0.004;
+ float  environnement::G3 = 0.585;
+ float  environnement::G4 = 0.0005;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -123,6 +130,7 @@ void environnement::Mouve(void)
 		vector newvit1(0,0);
 		vector newvit3(0,0);
 		vector newvit3b(0,0);
+		vector newvit4(0,0);
 
 		for(int j=0; j<nbProie;j++)
 		{
@@ -138,13 +146,7 @@ void environnement::Mouve(void)
 			}
 	
 		}
-		if (K1!=0)
-		{
 		
-			newvit2= newvit2/K1;
-			newvit1= newvit1/K1;
-		
-		}
 		
 		for (int k=0; k<nbProie;k++)
 		{
@@ -175,15 +177,37 @@ void environnement::Mouve(void)
 
 		}
 
-		if (O!=0)
+		for (int k=0; k<nbPredateur;k++)
 		{
-			newvit3b=newvit3b/O;
+
+			vector espace=TabPredateur[k].Get_pos()-TabProie[i].Get_pos();
+			float esp = espace.Get_Norm();
+
+			newvit4=espace/esp;
+			
+
+		}
+
+
+		if (K1!=0)
+		{
+		
+			newvit2= newvit2/K1;
+			newvit1= newvit1/K1;
+		
 		}
 
 		if (K2!=0)
 		{
 			newvit3=newvit3/(K2);
 		}
+
+		if (O!=0)
+		{
+			newvit3b=newvit3b/O;
+		}
+
+		
 
 		//printf("Valeur de newvit \n");
 		//newvit1.affichevector();
@@ -192,6 +216,7 @@ void environnement::Mouve(void)
 		vector V2=newvit2*dt;
 		vector V3=newvit3*dt;
 		vector V3b=newvit3b*dt;
+		vector V4=newvit4*dt;
 
 		//printf("Valeur de V1 :");
   		//V1.affichevector();
@@ -214,7 +239,8 @@ void environnement::Mouve(void)
   		//printf("\n");
 
   		V3b=V3b*G3;
-  		vector V=V1+V2-V3-V3b;
+  		V4=V4*G4;
+  		vector V=V1+V2-V3-V3b-V4;
 
   		V=TabProie[i].Get_vit()+V;
   		//printf("Valeur de V : ");
@@ -267,8 +293,8 @@ void environnement::vitfinalPred(void)
 {
 	for (int i = 0; i <nbPredateur; ++i)
 	{
-		float c=40*((float)rand() / (float)RAND_MAX)-20;
-  		float d=40*((float)rand() / (float)RAND_MAX)-20;
+		float c=60*((float)rand() / (float)RAND_MAX)-30;
+  		float d=60*((float)rand() / (float)RAND_MAX)-30;
   		vector v(c,d);
  		TabPredateur[i].Set_vit(v);
 
@@ -278,19 +304,19 @@ void environnement::vitfinalPred(void)
 
 		if ( a<10 )
 		{
-		v.SetX(-0.01);
+		v.SetX(-0.03);
 		}
 		if ( a>630 )
 		{
-		v.SetX(-0.01);
+		v.SetX(-0.03);
 		}
 		if ( b<10 )
 		{
-		v.SetY(0.01);
+		v.SetY(0.03);
 		}
 		if ( b>470 )
 		{
-		v.SetY(-0.01);
+		v.SetY(-0.03);
 		}
 
 		TabPredateur[i].Set_vit(v);

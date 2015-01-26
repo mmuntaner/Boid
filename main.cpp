@@ -11,7 +11,7 @@ int main()
 {
   printf("Hello World !\n");
 
-  environnement test(10,4,1);
+  environnement test(80,8,1);
 
 
   proie* tableau = test.Get_TabProie();
@@ -86,7 +86,7 @@ int main()
 
   for (int i=0; i<test.Get_nbProie();i++)
        {            
-      
+  
         win.draw_fsquare(tableau[i].Get_pos().Get_X()-2,tableau[i].Get_pos().Get_Y()-2,tableau[i].Get_pos().Get_X()+2,tableau[i].Get_pos().Get_Y()+2,0xFF0000);
        
       }
