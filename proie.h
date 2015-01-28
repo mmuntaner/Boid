@@ -47,6 +47,7 @@ class proie : public agent
     // =======================================================================
     proie(void);
     proie(float a, float b);
+    proie(const proie &model);
 
     // =======================================================================
     //                                Destructor

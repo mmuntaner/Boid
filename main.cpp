@@ -97,8 +97,11 @@ int main()
     {
       win.draw_fsquare(tabP[i].Get_pos().Get_X()-3,tabP[i].Get_pos().Get_Y()-3,tabP[i].Get_pos().Get_X()+3,tabP[i].Get_pos().Get_Y()+3,0xFF00);
     }  
-    
+  
+  printf("Nombre de proies mangées : %d\n",test.Get_nbProieM() );     
      }
+
+
     
 	//win.draw_point(300,300,0xFF00);
 	//win.draw_line(400,400,640,480,0xFF0000); // Coordonnées du point de départ et d'arrivée.

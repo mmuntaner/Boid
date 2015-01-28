@@ -32,6 +32,7 @@
 // ===========================================================================
 const int predateur::rayon=80;
 const int predateur::contact=20;
+
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -46,6 +47,7 @@ predateur::predateur(void)
   	float d=2*((float)rand() / (float)RAND_MAX)-1;
   	vector v(c,d);
   	vitesse=v;
+  	timer=0;
 
 
 }
@@ -72,6 +74,11 @@ void predateur::Set_vit(vector v)
 void predateur::Set_pos(vector v)
 {
 	position=v;
+}
+
+void predateur::Set_timer( int new_timer)
+{
+	timer=new_timer;
 }
 
 // ===========================================================================

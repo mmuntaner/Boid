@@ -68,6 +68,7 @@ class environnement
     inline int Get_nbObstacle(void) const;
     inline predateur* Get_TabPredateur(void) const;
     inline int Get_nbPredateur(void) const;
+    inline int Get_nbProieM(void);
     
 
     void vitfinalProie(void);
@@ -125,6 +126,7 @@ class environnement
       static const int W;
       static const int H;
       static const float dt;
+      static int ProieMange;
 
       static float G1;
       static float G2;
@@ -175,6 +177,11 @@ inline proie* environnement::Get_TabProie(void) const
  {
   return nbPredateur;
  }
+
+inline int environnement::Get_nbProieM(void)
+{
+  return ProieMange;
+}
 
 
 // ===========================================================================

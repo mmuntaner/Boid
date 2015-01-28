@@ -32,11 +32,12 @@
 // ===========================================================================
  const int environnement::W = 640;
  const int  environnement::H = 480;
- const float  environnement::dt=0.175;
+ const float  environnement::dt=0.179;
+ int environnement::ProieMange=0;
 
- float  environnement::G1 = 0.213;
+ float  environnement::G1 = 0.293;
  float  environnement::G2 = 0.004;
- float  environnement::G3 = 0.585;
+ float  environnement::G3 = 0.589;
  float  environnement::G4 = 0.05;
 // ===========================================================================
 //                                  Constructors
@@ -261,7 +262,7 @@ void environnement::Mouve(void)
 		{
 		V.SetX(0.007);
 		}
-		if ( a>630 )
+		else if ( a>630 )
 		{
 		V.SetX(-0.007);
 		}
@@ -269,7 +270,7 @@ void environnement::Mouve(void)
 		{
 		V.SetY(0.007);
 		}
-		if ( b>470 )
+		else if ( b>470 )
 		{
 		V.SetY(-0.007);
 		}
@@ -291,17 +292,7 @@ void environnement::posfinalProie(void)
 	for (int i=0; i<nbProie;i++)
 	{
 		TabProie[i].Set_pos(TabProie[i].Get_pos()+TabProie[i].Get_vit()*dt);
-
-		for (int j = 0; j < nbPredateur; j++)
-		{
-			if ((TabProie[i].Get_pos()-TabPredateur[j].Get_pos()).Get_Norm()<5)
-			{
-				vector inf(-100000,-100000);
-				TabProie[i].Set_pos(inf);
-			}
-		}
-
-		
+			
 	}		
 
 }
@@ -333,6 +324,7 @@ void environnement::vitfinalPred(void)
 				limite=distance;
 				position=j;
 			}
+
 		}
 
 	    if (limite>TabPredateur[i].Get_rayon() )
@@ -344,7 +336,7 @@ void environnement::vitfinalPred(void)
 
 			
 			
-		if (limite<TabPredateur[i].Get_rayon() )
+		else if (limite<TabPredateur[i].Get_rayon() )
 		{
 				
 				//printf("Hello\n");
@@ -408,7 +400,7 @@ void environnement::vitfinalPred(void)
 		{
 		direction.SetX(-2);
 		}
-		if ( a>630 )
+		else if ( a>630 )
 		{
 		direction.SetX(-2);
 		}
@@ -416,13 +408,17 @@ void environnement::vitfinalPred(void)
 		{
 		direction.SetY(2);
 		}
-		if ( b>470 )
+		else if ( b>470 )
 		{
 		direction.SetY(-2);
 		}
 
+
+
+
 		TabPredateur[i].Set_vit(direction);
-		
+
+
 
 
 		
@@ -434,45 +430,49 @@ void environnement::vitfinalPred(void)
 void environnement::posfinalPred(void)
 {
 
+
 	for (int i = 0; i <nbPredateur; i++)
 	{
-		
-		vector test = TabPredateur[i].Get_pos()+TabPredateur[i].Get_vit()*dt;
 
-		TabPredateur[i].Set_pos(TabPredateur[i].Get_pos()+TabPredateur[i].Get_vit()*dt);
-
-		/*vector direction(0,0);
-		int position;
-		float limite = 1000;
-		for (int j = 0; j <nbProie; ++j)
+		if (TabPredateur[i].Get_timer()>0)
 		{
-		
-			vector dist=TabPredateur[i].Get_pos() -TabProie[j].Get_pos();
-			float distance =dist.Get_Norm();
-
-			if ( distance < limite )
-			{
-				limite=distance;
-				position=j;
-			}
-
-		
-
-			if (distance<TabPredateur[j].Get_contact() )
-			{
-				direction.SetX(TabProie[position].Get_pos().Get_X());
-				direction.SetY(TabProie[position].Get_pos().Get_Y());
-				TabProie[position].Get_pos().affichevector();
-     	 	   
-				TabPredateur[i].Set_pos(TabPredateur[i].Get_pos()+direction*dt*0.0001);
-			}
+			vector null(0,0);
+ 	  	    TabPredateur[i].Set_vit(null);
+ 	   	    TabPredateur[i].Set_timer(TabPredateur[i].Get_timer()-1);
 		}
 
-		*/
+		for (int j = 0; j < nbProie; j++)
+		{
+			if ((TabProie[j].Get_pos()-TabPredateur[i].Get_pos()).Get_Norm()<10)
+			{
+				/*proie* tableau = new proie [nbProie-1];
 
-		
+ 				for(int k=0 ; k<i; k++)
+    			{
+      				tableau[k] = TabProie[k];
+ 			    }
+
+ 			    for (int k=i; k<nbProie-1; k++)
+ 			    {
+ 			    	tableau[k]=TabProie[k+1];
+ 			    }
+ 			    */
+ 			    vector null(0,0);
+ 			    TabPredateur[i].Set_vit(null);
+ 			    TabPredateur[i].Set_timer(20); 			    
+
+ 			    vector inf(-100000,-100000);
+				TabProie[j].Set_pos(inf);
+				ProieMange++;
+			}
+		} 
+
+		vector test = TabPredateur[i].Get_pos()+TabPredateur[i].Get_vit()*dt;
+
+		TabPredateur[i].Set_pos(TabPredateur[i].Get_pos()+TabPredateur[i].Get_vit()*dt);	
 
 	}
+
 
 	
 		

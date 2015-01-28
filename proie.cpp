@@ -58,6 +58,12 @@ proie::proie(float a, float b)
 	position=p;
 	
 }
+
+proie::proie(const proie &model)
+ {
+ 	position=model.position;
+ 	vitesse=model.position;
+ }
 // ===========================================================================
 //                                  Destructor
 // ===========================================================================

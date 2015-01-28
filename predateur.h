@@ -57,8 +57,10 @@ class predateur : public agent
     // =======================================================================
     inline const int Get_rayon(void) const; 
     inline const int Get_contact(void) const;
+    inline int Get_timer(void);
     void Set_vit(vector v);
     void Set_pos(vector v);
+    void Set_timer(int new_timer);
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
@@ -106,6 +108,7 @@ class predateur : public agent
     // =======================================================================
     static const int rayon;
     static const int contact;
+    int timer;
 
 };
 
@@ -121,6 +124,11 @@ inline const int predateur::Get_rayon(void) const
 inline const int predateur::Get_contact(void) const
 {
     return contact;
+}
+
+inline int predateur::Get_timer(void) 
+{
+    return timer;
 }
 
 // ===========================================================================
